@@ -123,3 +123,12 @@ just opens the table sheet instead of rolling it, please tell me exactly what yo
 - Older menus built with the earlier structured-list style still open in their original
   list-based popup for backward compatibility, but "New Menu" now only creates the
   text-editor style described above.
+
+## License
+
+Copyright (c) 2026 Robert Gill.
+
+Free to use in your own games under the **PolyForm Strict License 1.0.0** (see `LICENSE`):
+use for noncommercial purposes is permitted, but you may not distribute copies or make
+changes or new works based on it. For anything beyond that, please get in touch first.
+

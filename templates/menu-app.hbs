@@ -1,0 +1,112 @@
+<div class="btm-menu {{#if editMode}}btm-edit-mode{{/if}}">
+
+  {{#if editMode}}
+    <div class="btm-menu-header-edit">
+      <input type="text" class="btm-menu-name-input" value="{{menu.name}}" />
+      <button type="button" class="btm-output-toggle" data-action="toggleOutputMode">
+        <i class="fa-solid {{#if (eq menu.outputMode "popup")}}fa-window-restore{{else}}fa-comment{{/if}}"></i>
+        {{#if (eq menu.outputMode "popup")}}{{localize "BTM.OutputPopup"}}{{else}}{{localize "BTM.OutputChat"}}{{/if}}
+        (menu default)
+      </button>
+    </div>
+  {{/if}}
+
+  <ol class="btm-entry-list btm-drop-zone">
+    {{#each menu.entries as |entry|}}
+      <li class="btm-entry btm-entry-{{entry.type}} {{#if ../editMode}}btm-draggable-entry{{/if}}"
+          data-entry-id="{{entry.id}}"
+          {{#if ../editMode}}draggable="true"{{/if}}>
+
+        {{#if ../editMode}}
+
+          {{#if (eq entry.type "header")}}
+            <div class="btm-entry-edit-row">
+              <i class="fa-solid fa-grip-lines btm-drag-handle"></i>
+              <i class="fa-solid fa-heading"></i>
+              <input type="text" class="btm-entry-label-input" value="{{entry.label}}"
+                     data-rename-field="label" />
+              <button type="button" class="btm-icon-btn btm-delete-btn" data-action="deleteEntry" title="{{localize 'BTM.DeleteEntry'}}">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+
+          {{else if (eq entry.type "text")}}
+            <div class="btm-entry-edit-row">
+              <i class="fa-solid fa-grip-lines btm-drag-handle"></i>
+              <i class="fa-solid fa-align-left"></i>
+              <textarea class="btm-text-input" rows="2"
+                        data-rename-field="content">{{entry.content}}</textarea>
+              <button type="button" class="btm-icon-btn btm-delete-btn" data-action="deleteEntry" title="{{localize 'BTM.DeleteEntry'}}">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+
+          {{else}}
+            <div class="btm-entry-edit-row">
+              <i class="fa-solid fa-grip-lines btm-drag-handle"></i>
+              <i class="fa-solid {{#if (eq entry.type "table")}}fa-list{{else if (eq entry.type "macro")}}fa-bolt{{else}}fa-layer-group{{/if}}"></i>
+              <input type="text" class="btm-entry-label-input" value="{{entry.label}}"
+                     data-rename-field="label" />
+              <button type="button" class="btm-icon-btn" data-action="toggleOutputMode" title="{{localize 'BTM.OutputMode'}}">
+                <i class="fa-solid {{#if (eq entry.outputMode "popup")}}fa-window-restore{{else if (eq entry.outputMode "chat")}}fa-comment{{else}}fa-circle-minus{{/if}}"></i>
+              </button>
+              <button type="button" class="btm-icon-btn btm-delete-btn" data-action="deleteEntry" title="{{localize 'BTM.DeleteEntry'}}">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+
+            {{#if (eq entry.type "compound")}}
+              <textarea class="btm-template-input" rows="2"
+                        placeholder="{{localize 'BTM.CompoundTemplatePlaceholder'}}"
+                        data-rename-field="template">{{entry.template}}</textarea>
+              <ul class="btm-subtable-list btm-drop-zone" data-compound-drop data-entry-id="{{entry.id}}">
+                {{#each entry.tables as |sub|}}
+                  <li class="btm-subtable btm-draggable-sub" data-sub-id="{{sub.id}}" draggable="true">
+                    <i class="fa-solid fa-grip-lines btm-drag-handle"></i>
+                    <span class="btm-subtable-key">{ {{sub.key}} }</span>
+                    <span class="btm-subtable-label">{{sub.label}}</span>
+                    <button type="button" class="btm-icon-btn btm-delete-btn" data-action="removeSubTable" data-entry-id="{{entry.id}}">
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </li>
+                {{else}}
+                  <li class="btm-drop-hint">{{localize "BTM.DropHintCompound"}}</li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          {{/if}}
+
+        {{else}}
+          {{#if (eq entry.type "header")}}
+            <h4 class="btm-header-display">{{entry.label}}</h4>
+          {{else if (eq entry.type "text")}}
+            <p class="btm-text-display">{{entry.content}}</p>
+          {{else}}
+            <button type="button" class="btm-roll-btn" data-action="roll" data-entry-id="{{entry.id}}">
+              <i class="fa-solid {{#if (eq entry.type "table")}}fa-dice-d20{{else if (eq entry.type "macro")}}fa-bolt{{else}}fa-layer-group{{/if}}"></i>
+              <span>{{entry.label}}</span>
+            </button>
+          {{/if}}
+        {{/if}}
+
+      </li>
+    {{else}}
+      <li class="btm-empty">{{localize "BTM.DropHint"}}</li>
+    {{/each}}
+  </ol>
+
+  {{#if editMode}}
+    <div class="btm-menu-footer-edit">
+      <button type="button" class="btm-add-compound-btn" data-action="addCompound">
+        <i class="fa-solid fa-plus"></i> {{localize "BTM.NewCompound"}}
+      </button>
+      <button type="button" class="btm-add-header-btn" data-action="addHeader">
+        <i class="fa-solid fa-heading"></i> {{localize "BTM.AddHeader"}}
+      </button>
+      <button type="button" class="btm-add-text-btn" data-action="addText">
+        <i class="fa-solid fa-align-left"></i> {{localize "BTM.AddText"}}
+      </button>
+    </div>
+  {{/if}}
+
+</div>

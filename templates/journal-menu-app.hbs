@@ -1,0 +1,62 @@
+<div class="btm-journal-menu {{#if editMode}}btm-edit-mode{{/if}}">
+
+  {{#if editMode}}
+    <div class="btm-menu-header-edit">
+      <input type="text" class="btm-menu-name-input" value="{{menu.name}}" />
+    </div>
+    <p class="btm-journal-edit-hint">{{localize "BTM.JournalEditHint"}}</p>
+
+    <div class="btm-format-toolbar">
+      <button type="button" class="btm-format-btn" data-action="format" data-command="bold" title="Bold">
+        <i class="fa-solid fa-bold"></i>
+      </button>
+      <button type="button" class="btm-format-btn" data-action="format" data-command="italic" title="Italic">
+        <i class="fa-solid fa-italic"></i>
+      </button>
+      <button type="button" class="btm-format-btn" data-action="format" data-command="underline" title="Underline">
+        <i class="fa-solid fa-underline"></i>
+      </button>
+      <button type="button" class="btm-format-btn" data-action="format" data-command="strikeThrough" title="Strikethrough">
+        <i class="fa-solid fa-strikethrough"></i>
+      </button>
+      <span class="btm-format-divider"></span>
+      <select class="btm-format-font-select">
+        {{#each fonts as |font|}}
+          <option value="{{font.value}}" style="font-family: '{{font.value}}';">{{font.label}}</option>
+        {{/each}}
+      </select>
+      <span class="btm-format-divider"></span>
+      <select class="btm-format-fontsize-select" title="Font size (also resizes a selected chip)">
+        <option value="">Size</option>
+        {{#each sizes as |size|}}
+          <option value="{{size.value}}">{{size.label}}px</option>
+        {{/each}}
+      </select>
+      <span class="btm-format-divider"></span>
+      <button type="button" class="btm-format-btn" data-action="format" data-command="justifyLeft" title="Align left">
+        <i class="fa-solid fa-align-left"></i>
+      </button>
+      <button type="button" class="btm-format-btn" data-action="format" data-command="justifyCenter" title="Align center">
+        <i class="fa-solid fa-align-center"></i>
+      </button>
+      <button type="button" class="btm-format-btn" data-action="format" data-command="justifyRight" title="Align right">
+        <i class="fa-solid fa-align-right"></i>
+      </button>
+      <span class="btm-format-divider"></span>
+      <button type="button" class="btm-format-btn" data-action="format" data-command="removeFormat" title="Clear formatting">
+        <i class="fa-solid fa-text-slash"></i>
+      </button>
+      <span class="btm-format-divider"></span>
+      <button type="button" class="btm-format-btn" data-action="openTableGrid" title="Insert table">
+        <i class="fa-solid fa-table"></i>
+      </button>
+    </div>
+
+    <div class="editor btm-journal-editor-wrapper">
+      <div class="editor-content btm-journal-editor-target"></div>
+    </div>
+  {{else}}
+    <div class="btm-journal-display">{{{enriched}}}</div>
+  {{/if}}
+
+</div>

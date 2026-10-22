@@ -1,0 +1,26 @@
+<div class="btm-menu-list">
+  <ul>
+    {{#each menus as |menu|}}
+      <li class="btm-menu-list-row" data-menu-id="{{menu.id}}">
+        <button type="button" class="btm-menu-list-open-btn" data-action="openMenu">
+          <i class="fa-solid {{#if (eq menu.kind "journal")}}fa-book-open{{else}}fa-dice-d20{{/if}}"></i> {{menu.name}}
+        </button>
+        {{#if ../isGM}}
+          <button type="button" class="btm-icon-btn btm-delete-btn" data-action="deleteMenu" title="{{localize 'BTM.DeleteMenu'}}">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        {{/if}}
+      </li>
+    {{else}}
+      <li class="btm-empty">No menus yet.</li>
+    {{/each}}
+  </ul>
+
+  {{#if isGM}}
+    <div class="btm-menu-list-footer">
+      <button type="button" class="btm-add-menu-btn" data-action="newMenu">
+        <i class="fa-solid fa-plus"></i> {{localize "BTM.NewMenu"}}
+      </button>
+    </div>
+  {{/if}}
+</div>

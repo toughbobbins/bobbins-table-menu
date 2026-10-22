@@ -1,0 +1,639 @@
+.bobbins-table-menu .btm-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.btm-journal-menu-app.btm-nav-drop-hover {
+  outline: 2px dashed #782e22;
+  outline-offset: -2px;
+}
+
+.btm-menu-header-edit {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.25rem;
+  flex: 0 0 auto;
+}
+
+.btm-menu-name-input {
+  flex: 1;
+}
+
+.btm-output-toggle {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.btm-entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.15rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 2rem;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.btm-entry {
+  max-width: 100%;
+}
+
+.btm-entry-header,
+.btm-entry-text {
+  flex: 1 1 100%;
+}
+
+.btm-header-display {
+  text-align: center;
+}
+
+/* In edit mode, entries size to their content (a manageable card width) rather than
+   stretching the full window - so several can still sit side by side and wrap. */
+.btm-edit-mode .btm-entry {
+  flex: 0 1 260px;
+  width: auto;
+  max-width: 100%;
+}
+
+.btm-edit-mode .btm-entry-header,
+.btm-edit-mode .btm-entry-text {
+  flex: 1 1 100%;
+}
+
+.btm-entry {
+  border: 1px solid var(--color-border-light-tertiary, #999);
+  border-radius: 4px;
+  padding: 0.25rem 0.4rem;
+}
+
+.btm-entry-header,
+.btm-entry-text {
+  border: none;
+  padding: 0.15rem 0;
+}
+
+.btm-header-display {
+  margin: 0.4rem 0 0.1rem 0;
+  border-bottom: 1px solid var(--color-border-light-tertiary, #999);
+  padding-bottom: 0.15rem;
+}
+
+.btm-text-display {
+  margin: 0;
+  font-size: 0.9em;
+  opacity: 0.9;
+  white-space: pre-wrap;
+}
+
+.btm-roll-btn {
+  display: inline-flex;
+  width: auto;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+  padding: 0.4rem 0.7rem;
+}
+
+.btm-drag-handle {
+  cursor: grab;
+  opacity: 0.5;
+  flex: 0 0 auto;
+}
+
+.btm-draggable-entry,
+.btm-draggable-sub {
+  cursor: default;
+}
+
+.btm-entry-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btm-entry-label-input {
+  flex: 1;
+}
+
+.btm-icon-btn {
+  flex: 0 0 auto;
+  width: 2rem;
+  padding: 0.2rem;
+}
+
+.btm-delete-btn i {
+  color: #a33;
+}
+
+.btm-template-input {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.85em;
+}
+
+.btm-subtable-list {
+  list-style: none;
+  margin: 0.3rem 0 0 0;
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  border: 1px dashed var(--color-border-light-tertiary, #999);
+  border-radius: 4px;
+  min-height: 1.75rem;
+}
+
+.btm-subtable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.85em;
+}
+
+.btm-subtable-key {
+  font-family: monospace;
+  opacity: 0.7;
+}
+
+.btm-subtable-label {
+  flex: 1;
+}
+
+.btm-drop-hint,
+.btm-empty {
+  opacity: 0.6;
+  font-style: italic;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.85em;
+}
+
+.btm-menu-footer-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex: 0 0 auto;
+}
+
+.btm-add-compound-btn,
+.btm-add-menu-btn,
+.btm-add-header-btn,
+.btm-add-text-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  flex: 1 1 auto;
+}
+
+.btm-menu-list-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.btm-menu-list-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btm-menu-list-open-btn {
+  flex: 1;
+  text-align: left;
+}
+
+.btm-menu-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* Full-width bar in the sidebar header, in its own row, so it stacks cleanly above or
+   below other full-width header buttons (e.g. Bobbins Tables' "Create Bobbins Table")
+   instead of sitting beside them at a different size. Font size and padding are left to
+   Foundry's own button styling so it matches its neighbours. */
+.btm-open-list-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.btm-chat-result h3 {
+  margin: 0 0 0.25rem 0;
+}
+
+/* Label shown before a value in advanced-table results (DTM and bobbins-tables both) -
+   bold comes from the <strong> tag itself; faded slightly so it reads as a field name
+   rather than being as prominent as the actual result. */
+.btm-result-label {
+  opacity: 0.65;
+}
+
+.bobbins-table-menu .btm-journal-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  height: 100%;
+  min-height: 0;
+  position: relative;
+}
+
+/* Foundry's own core CSS also styles .window-content, and was winning the specificity
+   fight against a plain override here - hence !important, needed to make the popup
+   actually match the paper look chat already had correctly. */
+.btm-choice-popup .window-content { padding: 8px; }
+.btm-journal-menu-app .window-content {
+  background: #f0f0e0 !important;
+  color: #191813 !important;
+}
+
+.btm-journal-menu-app.btm-theme-dark .window-content {
+  background: #1e1e1e !important;
+  color: #e8e0d0 !important;
+}
+
+.btm-journal-chat-card {
+  background: #f0f0e0;
+  color: #191813;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+}
+
+.btm-journal-chat-card.btm-theme-dark {
+  background: #1e1e1e;
+  color: #e8e0d0;
+}
+
+/* GM Roll header button shows an active/highlighted state when on - the theme/edit
+   buttons don't need this since their icon itself already communicates current state. */
+.btm-header-gmroll.btm-header-active {
+  color: #ff6b4a;
+}
+
+.btm-format-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem;
+  flex: 0 0 auto;
+  padding: 0.2rem;
+  border: 1px solid var(--color-border-light-tertiary, #999);
+  border-radius: 4px;
+}
+
+.btm-format-btn {
+  min-width: 1.8rem;
+  padding: 0.2rem 0.4rem;
+  line-height: 1;
+}
+
+.btm-format-font-select {
+  max-width: 9rem;
+  font-size: 0.85em;
+}
+
+.btm-format-fontsize-select {
+  max-width: 5rem;
+  font-size: 0.85em;
+}
+
+.btm-format-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--color-border-light-tertiary, #999);
+  margin: 0 0.2rem;
+}
+
+.btm-journal-edit-hint {
+  opacity: 0.7;
+  font-size: 0.85em;
+  font-style: italic;
+  margin: 0;
+}
+
+.btm-journal-editor-wrapper {
+  flex: 1 1 auto;
+  min-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border-light-tertiary, #999);
+  border-radius: 4px;
+  position: relative;
+}
+
+.btm-journal-editor-target {
+  min-height: 200px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 0.4rem;
+  outline: none;
+}
+
+.btm-journal-editor-target:focus {
+  box-shadow: inset 0 0 0 1px var(--color-cool-4, #5a5a8a);
+}
+
+.btm-journal-display {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.btm-journal-chat-card {
+  padding: 0.25rem 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Chips deliberately have no VISIBLE border/background/color of their own - they
+   inherit whatever the surrounding container looks like (paper in light theme,
+   black+white in dark theme), so they blend in rather than standing out as a separate
+   box. The border is transparent rather than removed entirely though - an invisible
+   border still occupies its own layout space, which is what keeps adjacent chips (with
+   no separating text) from visually butting up against each other. */
+.btm-rolltable-link,
+.btm-editor-chip,
+a.content-link[data-uuid],
+.btm-chip-style-icon,
+.btm-chip-style-icon-label,
+.btm-chip-label {
+  background: transparent !important;
+}
+
+.btm-rolltable-link,
+.btm-editor-chip,
+a.content-link[data-uuid] {
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: calc(1em * var(--btm-chip-scale, 1));
+  border: 1px solid transparent;
+  padding: 1px 3px;
+}
+
+.btm-editor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  cursor: grab;
+  user-select: none;
+}
+
+.btm-chip-selected {
+  outline: 2px solid #4a90d9;
+  outline-offset: 1px;
+}
+
+.btm-chip-icon {
+  width: calc(1em * var(--btm-chip-scale, 1));
+  height: calc(1em * var(--btm-chip-scale, 1));
+  vertical-align: middle;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* "Icon" and "Icon + Label" chip styles: large square icon, stacked layout instead of
+   the compact inline row. !important here because these classes get applied directly to
+   Foundry's own real <a class="content-link"> element in the final live/chat rendering,
+   and core Foundry CSS targeting content-links (e.g. their own icon sizing) was winning
+   the specificity fight in that context - without !important the icon rendered at the
+   wrong size in chat, and wasn't reliably part of the link's own clickable flex box. */
+.btm-chip-style-icon,
+.btm-chip-style-icon-label {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 4px;
+  vertical-align: top;
+}
+
+/* Icon-only specifically: reset width/min-width so the chip shrink-wraps to just the
+   icon, rather than any leftover width Foundry's own content-link base styles might be
+   contributing (padding/min-width meant for a text label that isn't there in this style). */
+/* Chat-specific clipping: Foundry's chat log applies its own text-truncation CSS
+   (overflow:hidden + ellipsis, sized for a text label) to content-links, which was
+   clipping the icon-only layout's 48px icon down to a thin sliver - only happened in
+   chat, not the popup, which is what pointed at chat-log-specific CSS as the cause. */
+.btm-chip-style-icon,
+.btm-chip-style-icon-label,
+.btm-editor-chip,
+.btm-rolltable-link,
+a.content-link[data-uuid] {
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.btm-chip-style-icon {
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+.btm-chip-icon-large {
+  width: calc(48px * var(--btm-chip-scale, 1)) !important;
+  height: calc(48px * var(--btm-chip-scale, 1)) !important;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block !important;
+}
+
+i.btm-chip-icon-large {
+  width: calc(48px * var(--btm-chip-scale, 1)) !important;
+  height: calc(48px * var(--btm-chip-scale, 1)) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(1.8em * var(--btm-chip-scale, 1)) !important;
+}
+
+.btm-chip-label {
+  font-size: calc(0.75em * var(--btm-chip-scale, 1));
+  text-align: center;
+  width: calc(48px * var(--btm-chip-scale, 1));
+  outline: none;
+  cursor: text;
+  white-space: normal !important;
+  word-wrap: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  overflow: visible;
+  color: #191813 !important;
+}
+
+.btm-theme-dark .btm-chip-label {
+  color: #e8e0d0 !important;
+}
+
+.btm-chip-label:focus {
+  box-shadow: inset 0 0 0 1px #782e22;
+  border-radius: 2px;
+}
+
+.btm-theme-dark .btm-chip-label:focus {
+  box-shadow: inset 0 0 0 1px #a85a4a;
+}
+
+/* Floating popups (chip right-click menu, table-grid picker) - positioned in JS via
+   fixed left/top, appended to document.body so they float above the app window. */
+.btm-chip-context-menu,
+.btm-tablegrid-picker {
+  position: fixed;
+  z-index: 10000;
+  background: #1f1d1a;
+  border: 1px solid #782e22;
+  border-radius: 4px;
+  padding: 0.3rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  color: #e8e0d0;
+}
+
+.btm-chip-menu-divider {
+  height: 1px;
+  background: #782e22;
+  margin: 0.25rem 0;
+}
+
+.btm-chip-context-menu button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.3rem 0.5rem;
+  background: none;
+  border: none;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.btm-chip-context-menu button[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btm-chip-context-menu button[disabled]:hover {
+  background: none;
+}
+
+.btm-chip-context-menu button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btm-tablegrid-cells {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 0.3rem;
+}
+
+.btm-tablegrid-cell {
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1px solid #782e22;
+  background: transparent;
+}
+
+.btm-tablegrid-cell.active {
+  background: #782e22;
+}
+
+.btm-tablegrid-label {
+  text-align: center;
+  font-size: 0.85em;
+}
+
+/* Inserted tables: real <table> elements, so rows/columns naturally size to their
+   largest content for free. Dashed borders only show in edit mode (scoped under
+   .btm-edit-mode); the same stored table renders borderless in the final view/chat
+   output, since that's a separate .btm-journal-display / chat-card context. Explicitly
+   transparent background on every row/cell - core Foundry table CSS otherwise applies
+   its own zebra-striping, which isn't wanted here; this keeps the same background as
+   the surrounding page (paper in light mode, Foundry's normal dark panel in dark mode)
+   rather than an extra shaded layer on top of it. */
+.btm-inserted-table,
+.btm-inserted-table tr,
+.btm-inserted-table td {
+  background: transparent !important;
+}
+
+.btm-inserted-table {
+  border-collapse: collapse;
+  margin: 0.3rem 0;
+}
+
+.btm-inserted-table td {
+  padding: 0.2rem 0.4rem;
+  vertical-align: top;
+  min-width: 2em;
+  min-height: 1.2em;
+}
+
+.btm-edit-mode .btm-inserted-table td {
+  border: 1px dashed #782e22;
+}
+
+.btm-theme-dark .btm-edit-mode .btm-inserted-table td {
+  border-color: #a85a4a;
+}
+
+/* Edit-mode-only wrapper around each inserted table, giving it a positioning context
+   for the hover-revealed "select all chips in this table" button - never saved/rendered
+   outside edit mode (unwrapped again before content is saved; see chipsToMarkup). */
+.btm-table-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.btm-table-select-all-btn {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  z-index: 2;
+}
+
+.btm-table-wrapper:hover .btm-table-select-all-btn {
+  opacity: 1;
+}
+
+.btm-inserted-image {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
+.btm-image-selected {
+  outline: 2px solid #4a90d9;
+  outline-offset: 1px;
+}

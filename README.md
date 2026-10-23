@@ -1,7 +1,9 @@
 # Bobbins Table Menu
 
 
-https://youtu.be/ugdSaDWQDak
+Basic Demo - https://youtu.be/ugdSaDWQDak
+Dolmewood Integration - https://youtube.com/shorts/0gXG7L5uGls?feature=share
+
 
 Build inter-linked quick launch dashboards of RollTables and Macros with a drag and drop text editor, styled buttons and one-click rolling to a popup or chat. Works with Bobbins Tables to create branching decision trees.
 

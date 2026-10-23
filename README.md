@@ -1,6 +1,6 @@
 # Bobbins Table Menu
 
-Build an inter-linked quick launch dashboards of RollTables and Macros with a drag and drop text editor, styled buttons and one-click rolling to a popup or chat. Works with Bobbins Tables to create branching decision trees.
+Build inter-linked quick launch dashboards of RollTables and Macros with a drag and drop text editor, styled buttons and one-click rolling to a popup or chat. Works with Bobbins Tables to create branching decision trees.
 
 Requires Foundry v13. GM only.
 
@@ -17,7 +17,7 @@ In Foundry's Add-on Modules, choose Install Module and paste this manifest URL:
 3. Right-click a chip to change its label, icon, border or layout. Click a chip to select it, then resize it from the size dropdown or press Delete.
 4. The pen/eye button switches between editing and live view. The megaphone switches GM Roll, which whispers results to GMs.
 5. The "..." menu has Send to Chat, Build Popup Macro and Build Chat Macro (saved in a "Table Launcher Macros" folder), Dark/Light and Delete Menu.
-6. Menus can link to eachother creating an eco system of launchers. 
+6. Menus can link to each other creating an ecosystem of launchers.
 
 ## Works with
 

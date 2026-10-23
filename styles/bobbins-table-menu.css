@@ -24,11 +24,6 @@
   flex: 1;
 }
 
-.btm-output-toggle {
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-
 .btm-entry-list {
   list-style: none;
   margin: 0;
@@ -49,51 +44,10 @@
   max-width: 100%;
 }
 
-.btm-entry-header,
-.btm-entry-text {
-  flex: 1 1 100%;
-}
-
-.btm-header-display {
-  text-align: center;
-}
-
-/* In edit mode, entries size to their content (a manageable card width) rather than
-   stretching the full window - so several can still sit side by side and wrap. */
-.btm-edit-mode .btm-entry {
-  flex: 0 1 260px;
-  width: auto;
-  max-width: 100%;
-}
-
-.btm-edit-mode .btm-entry-header,
-.btm-edit-mode .btm-entry-text {
-  flex: 1 1 100%;
-}
-
 .btm-entry {
   border: 1px solid var(--color-border-light-tertiary, #999);
   border-radius: 4px;
   padding: 0.25rem 0.4rem;
-}
-
-.btm-entry-header,
-.btm-entry-text {
-  border: none;
-  padding: 0.15rem 0;
-}
-
-.btm-header-display {
-  margin: 0.4rem 0 0.1rem 0;
-  border-bottom: 1px solid var(--color-border-light-tertiary, #999);
-  padding-bottom: 0.15rem;
-}
-
-.btm-text-display {
-  margin: 0;
-  font-size: 0.9em;
-  opacity: 0.9;
-  white-space: pre-wrap;
 }
 
 .btm-roll-btn {
@@ -106,27 +60,6 @@
   padding: 0.4rem 0.7rem;
 }
 
-.btm-drag-handle {
-  cursor: grab;
-  opacity: 0.5;
-  flex: 0 0 auto;
-}
-
-.btm-draggable-entry,
-.btm-draggable-sub {
-  cursor: default;
-}
-
-.btm-entry-edit-row {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.btm-entry-label-input {
-  flex: 1;
-}
-
 .btm-icon-btn {
   flex: 0 0 auto;
   width: 2rem;
@@ -136,44 +69,6 @@
 .btm-delete-btn i {
   color: #a33;
 }
-
-.btm-template-input {
-  width: 100%;
-  margin-top: 0.25rem;
-  font-size: 0.85em;
-}
-
-.btm-subtable-list {
-  list-style: none;
-  margin: 0.3rem 0 0 0;
-  padding: 0.3rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  border: 1px dashed var(--color-border-light-tertiary, #999);
-  border-radius: 4px;
-  min-height: 1.75rem;
-}
-
-.btm-subtable {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 0.85em;
-}
-
-.btm-subtable-key {
-  font-family: monospace;
-  opacity: 0.7;
-}
-
-.btm-subtable-label {
-  flex: 1;
-}
-
-.btm-drop-hint,
 .btm-empty {
   opacity: 0.6;
   font-style: italic;
@@ -181,18 +76,7 @@
   padding: 0.5rem;
   font-size: 0.85em;
 }
-
-.btm-menu-footer-edit {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  flex: 0 0 auto;
-}
-
-.btm-add-compound-btn,
-.btm-add-menu-btn,
-.btm-add-header-btn,
-.btm-add-text-btn {
+.btm-add-menu-btn {
   display: flex;
   align-items: center;
   justify-content: center;

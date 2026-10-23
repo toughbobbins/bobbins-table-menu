@@ -114,7 +114,7 @@ export function interceptRollTableLinks(root, gmRoll = false) {
       event.stopPropagation();
       const table = await fromUuid(link.dataset.btmUuid);
       if (!table) {
-        ui.notifications.warn("Bobbins Table Menu: that RollTable no longer exists.");
+        ui.notifications.warn("BTM: that RollTable no longer exists.");
         return;
       }
       const draw = await rollSingleTable(table.id);

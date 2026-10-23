@@ -6,12 +6,12 @@ const { ApplicationV2 } = foundry.applications.api;
  * choice-popup.js
  * -----------------------------------------------------------------------
  * Public API surface: game.modules.get("bobbins-table-menu").api.showChoicePopup().
- * A read-only prompt - no editing, no drag-drop, none of MenuApp's machinery
+ * A read-only prompt - no editing, no drag-drop, none of the menu window's machinery
  * - for another module (Bobbins Tables' Decision nodes, primarily) to ask
  * "pick one of these" using the same icon+label chip look as a real menu.
  *
- * Deliberately its own tiny ApplicationV2, not a stripped-down MenuApp -
- * MenuApp is for editing/owning a persistent menu; this is a one-shot
+ * Deliberately its own tiny ApplicationV2, not a stripped-down menu window -
+ * the menu window is for editing/owning a persistent menu; this is a one-shot
  * prompt a caller awaits the answer from. Each call opens its own window,
  * and picking a choice closes it.
  */

@@ -70,7 +70,7 @@ function stripTags(html) {
 export async function rollSingleTable(tableId, _visited = new Set()) {
   const table = game.tables.get(tableId);
   if (!table) {
-    ui.notifications.warn(`Bobbins Table Menu: RollTable ${tableId} no longer exists.`);
+    ui.notifications.warn(`BTM: RollTable ${tableId} no longer exists.`);
     return null;
   }
 
@@ -103,11 +103,11 @@ export async function rollSingleTable(tableId, _visited = new Set()) {
         `Bobbins Table Menu: "${table.name}" is a Bobbins Tables table this menu can't roll by itself (Bobbins Tables may be disabled, or the table uses features this menu doesn't read).`
       );
       ui.notifications.warn(
-        `Bobbins Table Menu: "${table.name}" needs the Bobbins Tables module enabled to roll.`
+        `BTM: "${table.name}" needs the Bobbins Tables module enabled to roll.`
       );
       return {
         table,
-        text: "(this table needs the Bobbins Tables module enabled to roll)",
+        text: "The table needs Bobbins Tables to roll",
         results: [],
         roll: rolls[0],
         allRolls: rolls
@@ -123,7 +123,7 @@ export async function rollSingleTable(tableId, _visited = new Set()) {
   const inactiveOwner = findInactiveOwnerModule(table);
   if (inactiveOwner && table.results.size === 0) {
     ui.notifications.warn(
-      `Bobbins Table Menu: "${table.name}" needs the "${inactiveOwner}" module enabled to roll.`
+      `BTM: "${table.name}" needs the "${inactiveOwner}" module enabled to roll.`
     );
     return {
       table,
@@ -157,7 +157,7 @@ export async function rollSingleTable(tableId, _visited = new Set()) {
   const pieces = [];
 
   if (!draw.results.length) {
-    ui.notifications.warn(`Bobbins Table Menu: "${table.name}" has no results available to draw.`);
+    ui.notifications.warn(`BTM: "${table.name}" has no results available to draw.`);
   }
 
   for (const result of draw.results) {
@@ -206,82 +206,6 @@ function getNestedRollTable(result) {
 
 function resultToText(result) {
   return result.name || result.text || result.description || "";
-}
-
-/**
- * Roll every sub-table in a compound entry, then build the narrative text
- * from the entry's template (if set) or by auto-joining the results.
- */
-export async function rollCompoundEntry(entry) {
-  const rolled = [];
-  for (const sub of entry.tables) {
-    const draw = await rollSingleTable(sub.tableId);
-    if (!draw) continue;
-    rolled.push({ key: sub.key, label: sub.label, text: draw.text, table: draw.table });
-  }
-
-  let narrative;
-  if (entry.template && entry.template.trim().length > 0) {
-    narrative = entry.template;
-    for (const r of rolled) {
-      narrative = narrative.replaceAll(`{${r.key}}`, r.text);
-    }
-  } else {
-    narrative = rolled.map(r => `${r.label}: ${r.text}`).join("; ");
-  }
-
-  return { narrative, rolled };
-}
-
-/**
- * Execute a menu entry (table, macro, or compound) and route the output
- * to chat or a popup, per the menu/entry's outputMode.
- */
-export async function executeEntry(menu, entry) {
-  const outputMode = entry.outputMode || menu.outputMode || "chat";
-
-  if (entry.type === "text" || entry.type === "header") return; // not rollable
-
-  if (entry.type === "macro") {
-    const macro = game.macros.get(entry.macroId);
-    if (!macro) {
-      ui.notifications.warn(`Bobbins Table Menu: Macro ${entry.macroId} no longer exists.`);
-      return;
-    }
-    return macro.execute();
-  }
-
-  if (entry.type === "table") {
-    const draw = await rollSingleTable(entry.tableId);
-    if (!draw) return;
-    await deliverResult({
-      title: entry.label || draw.table.name,
-      text: draw.text,
-      outputMode,
-      roll: draw.roll,
-      allRolls: draw.allRolls,
-      gmRoll: menu.gmRoll
-    });
-    return;
-  }
-
-  if (entry.type === "compound") {
-    const { narrative } = await rollCompoundEntry(entry);
-    await deliverResult({
-      title: entry.label,
-      text: narrative,
-      outputMode,
-      gmRoll: menu.gmRoll
-    });
-    return;
-  }
-}
-
-async function deliverResult({ title, text, outputMode, roll, allRolls, gmRoll }) {
-  if (outputMode === "popup") {
-    return showResultPopup(title, text);
-  }
-  return postToChat(title, text, allRolls?.length ? allRolls : roll, { whisperGM: !!gmRoll });
 }
 
 /** Foundry's ChatMessage validation rejects any Roll that hasn't been evaluated - a
@@ -346,17 +270,3 @@ export async function postToChat(title, text, rollOrRolls, { whisperGM = false }
   return ChatMessage.create(messageData);
 }
 
-function showResultPopup(title, text) {
-  new foundry.applications.api.DialogV2({
-    window: { title },
-    content: `<div class="btm-popup-result"><p>${text}</p></div>`,
-    buttons: [
-      {
-        action: "close",
-        label: "Close",
-        default: true,
-        callback: () => {}
-      }
-    ]
-  }).render(true);
-}

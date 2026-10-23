@@ -3,7 +3,7 @@
     {{#each menus as |menu|}}
       <li class="btm-menu-list-row" data-menu-id="{{menu.id}}">
         <button type="button" class="btm-menu-list-open-btn" data-action="openMenu">
-          <i class="fa-solid {{#if (eq menu.kind "journal")}}fa-book-open{{else}}fa-dice-d20{{/if}}"></i> {{menu.name}}
+          <i class="fa-solid fa-book-open"></i> {{menu.name}}
         </button>
         {{#if ../isGM}}
           <button type="button" class="btm-icon-btn btm-delete-btn" data-action="deleteMenu" title="{{localize 'BTM.DeleteMenu'}}">

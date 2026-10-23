@@ -6,8 +6,7 @@ export const SETTING_MENUS = "menus";
  * {
  *   id: string,
  *   name: string,
- *   kind: "list" | "journal",   // "list" (default) = structured entries; "journal" = rich-text mode
- *   outputMode: "chat" | "popup",
+ *   kind: "journal",   // every menu is a rich-text page; the older "list" kind is no longer supported
  *   gmRoll: boolean,   // when true, rolls triggered from this menu are whispered to GMs only
  *   chipIcons: { [uuid]: true | "path/to/image.png" },   // true = table/macro's own icon, string = custom chosen image
  *   chipStyle: { [uuid]: "compact" | "icon" | "icon-label" },   // per-table chip layout, default "compact"
@@ -15,15 +14,7 @@ export const SETTING_MENUS = "menus";
  *   chipBorder: { [uuid]: true },   // tables/macros the user chose to show a thin text-colored border around
  *   theme: "light" | "dark",   // per-menu color theme, default "light"
  *   windowPosition: { left, top, width, height } | undefined,
- *   entries: [   // only used when kind === "list"
- *     { id, type: "table", tableId, label, outputMode? },
- *     { id, type: "macro", macroId, label },
- *     { id, type: "header", label },
- *     { id, type: "text", content },
- *     { id, type: "compound", label, template, outputMode?,
- *       tables: [ { id, tableId, key, label } ] }
- *   ],
- *   content: string   // only used when kind === "journal" - rich HTML with embedded content links
+ *   content: string   // rich HTML with embedded content links
  * }
  */
 
@@ -93,21 +84,19 @@ function enqueueWrite(fn) {
   return result;
 }
 
-export async function createMenu(name, kind = "journal") {
+export async function createMenu(name) {
   return enqueueWrite(async () => {
     const menus = getMenus();
     const menu = {
       id: foundry.utils.randomID(),
       name: name || game.i18n.localize("BTM.NewMenuName"),
-      kind,
-      outputMode: "chat",
+      kind: "journal",
       gmRoll: false,
       chipIcons: {},
       chipStyle: {},
       chipScale: {},
       chipBorder: {},
       theme: "light",
-      entries: [],
       content: ""
     };
     menus.push(menu);
@@ -131,104 +120,6 @@ export async function deleteMenu(menuId) {
   return enqueueWrite(async () => {
     const menus = getMenus().filter(m => m.id !== menuId);
     await saveMenus(menus);
-  });
-}
-
-export async function addEntry(menuId, entry) {
-  return enqueueWrite(async () => {
-    const menus = getMenus();
-    const menu = menus.find(m => m.id === menuId);
-    if (!menu) return null;
-    entry.id = entry.id ?? foundry.utils.randomID();
-    menu.entries.push(entry);
-    await saveMenus(menus);
-    return entry;
-  });
-}
-
-export async function updateEntry(menuId, entryId, updates) {
-  return enqueueWrite(async () => {
-    const menus = getMenus();
-    const menu = menus.find(m => m.id === menuId);
-    if (!menu) return null;
-    const idx = menu.entries.findIndex(e => e.id === entryId);
-    if (idx === -1) return null;
-    menu.entries[idx] = foundry.utils.mergeObject(menu.entries[idx], updates, { inplace: false });
-    await saveMenus(menus);
-    return menu.entries[idx];
-  });
-}
-
-export async function deleteEntry(menuId, entryId) {
-  return enqueueWrite(async () => {
-    const menus = getMenus();
-    const menu = menus.find(m => m.id === menuId);
-    if (!menu) return null;
-    menu.entries = menu.entries.filter(e => e.id !== entryId);
-    await saveMenus(menus);
-  });
-}
-
-export async function addTableToCompound(menuId, entryId, tableId, label) {
-  return enqueueWrite(async () => {
-    const menus = getMenus();
-    const menu = menus.find(m => m.id === menuId);
-    if (!menu) return null;
-    const entry = menu.entries.find(e => e.id === entryId);
-    if (!entry || entry.type !== "compound") return null;
-    const key = slugifyKey(label, entry.tables);
-    entry.tables.push({ id: foundry.utils.randomID(), tableId, key, label });
-    await saveMenus(menus);
-    return entry;
-  });
-}
-
-export async function removeTableFromCompound(menuId, entryId, subTableId) {
-  return enqueueWrite(async () => {
-    const menus = getMenus();
-    const menu = menus.find(m => m.id === menuId);
-    if (!menu) return null;
-    const entry = menu.entries.find(e => e.id === entryId);
-    if (!entry || entry.type !== "compound") return null;
-    entry.tables = entry.tables.filter(t => t.id !== subTableId);
-    await saveMenus(menus);
-    return entry;
-  });
-}
-
-/** Move entry `entryId` to just before `targetEntryId` (or to the end if targetEntryId is null/absent). */
-export async function reorderEntry(menuId, entryId, targetEntryId) {
-  return enqueueWrite(async () => {
-    const menus = getMenus();
-    const menu = menus.find(m => m.id === menuId);
-    if (!menu || entryId === targetEntryId) return null;
-    const fromIdx = menu.entries.findIndex(e => e.id === entryId);
-    if (fromIdx === -1) return null;
-    const [moved] = menu.entries.splice(fromIdx, 1);
-    const toIdx = targetEntryId ? menu.entries.findIndex(e => e.id === targetEntryId) : -1;
-    if (toIdx === -1) menu.entries.push(moved);
-    else menu.entries.splice(toIdx, 0, moved);
-    await saveMenus(menus);
-    return menu;
-  });
-}
-
-/** Move sub-table `subId` (within compound `entryId`) to just before `targetSubId`, or to the end. */
-export async function reorderSubTable(menuId, entryId, subId, targetSubId) {
-  return enqueueWrite(async () => {
-    const menus = getMenus();
-    const menu = menus.find(m => m.id === menuId);
-    if (!menu) return null;
-    const entry = menu.entries.find(e => e.id === entryId);
-    if (!entry || entry.type !== "compound" || subId === targetSubId) return null;
-    const fromIdx = entry.tables.findIndex(t => t.id === subId);
-    if (fromIdx === -1) return null;
-    const [moved] = entry.tables.splice(fromIdx, 1);
-    const toIdx = targetSubId ? entry.tables.findIndex(t => t.id === targetSubId) : -1;
-    if (toIdx === -1) entry.tables.push(moved);
-    else entry.tables.splice(toIdx, 0, moved);
-    await saveMenus(menus);
-    return entry;
   });
 }
 
@@ -305,20 +196,4 @@ export async function setMenuTheme(menuId, theme) {
     await saveMenus(menus);
     return menu;
   });
-}
-
-/** Build a unique {placeholder} key from a table's name, avoiding collisions within a compound entry. */
-function slugifyKey(label, existingTables) {
-  let base = (label || "table")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "") || "table";
-  let key = base;
-  let n = 2;
-  const used = new Set((existingTables ?? []).map(t => t.key));
-  while (used.has(key)) {
-    key = `${base}_${n}`;
-    n++;
-  }
-  return key;
 }

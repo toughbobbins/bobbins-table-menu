@@ -7,7 +7,6 @@ import { interceptRollTableLinks, applyChipStyling } from "./content-link-interc
 Hooks.once("init", () => {
   registerSettings();
   foundry.applications.handlebars.loadTemplates([
-    `modules/${MODULE_ID}/templates/menu-app.hbs`,
     `modules/${MODULE_ID}/templates/menu-list.hbs`,
     `modules/${MODULE_ID}/templates/journal-menu-app.hbs`
   ]);
@@ -28,7 +27,7 @@ Hooks.once("ready", () => {
       if (!game.user.isGM) return ui.notifications.warn(game.i18n.localize("BTM.GmOnly"));
       const menu = getMenu(menuId);
       if (!menu) {
-        ui.notifications.warn("Bobbins Table Menu: that menu no longer exists.");
+        ui.notifications.warn("BTM: that menu no longer exists.");
         return;
       }
       return postJournalMenuToChat(menu);

@@ -29,7 +29,7 @@ export async function createMenuMacro(menu, mode) {
     const update = { name, command };
     if (existing.folder?.id !== folder.id) update.folder = folder.id;
     await existing.update(update);
-    ui.notifications.info(`Bobbins Table Menu: updated existing macro "${name}".`);
+    ui.notifications.info(`BTM: updated existing macro "${name}".`);
     return existing;
   }
 
@@ -44,6 +44,6 @@ export async function createMenuMacro(menu, mode) {
       [MODULE_ID]: { menuId: menu.id, macroMode: mode }
     }
   });
-  ui.notifications.info(`Bobbins Table Menu: created macro "${name}".`);
+  ui.notifications.info(`BTM: created macro "${name}".`);
   return macro;
 }

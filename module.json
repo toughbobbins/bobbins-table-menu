@@ -1,8 +1,8 @@
 {
   "id": "bobbins-table-menu",
   "title": "Bobbins Table Menu",
-  "description": "Build curated menus of RollTables and Macros with a text editor, styled chips and one-click rolling to a popup or chat. Works with Dynamic Table Manager and Bobbins Tables.",
-  "version": "1.17.6",
+  "description": "Build inter-linked quick launch dashboards of RollTables and Macros with a drag and drop text editor, styled buttons and one-click rolling to a popup or chat. Works with Bobbins Tables to create branching decision trees.",
+  "version": "1.17.7",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351"
@@ -37,7 +37,7 @@
   ],
   "url": "https://github.com/toughbobbins/bobbins-table-menu",
   "manifest": "https://github.com/toughbobbins/bobbins-table-menu/releases/latest/download/module.json",
-  "download": "https://github.com/toughbobbins/bobbins-table-menu/releases/download/v1.17.6/bobbins-table-menu-v1.17.6.zip",
+  "download": "https://github.com/toughbobbins/bobbins-table-menu/releases/download/v1.17.7/bobbins-table-menu-v1.17.7.zip",
   "bugs": "https://github.com/toughbobbins/bobbins-table-menu/issues",
   "license": "LICENSE"
 }

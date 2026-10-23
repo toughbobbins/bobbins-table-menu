@@ -222,7 +222,7 @@ export class JournalMenuApp extends HandlebarsApplicationMixin(ApplicationV2) {
     // GM Roll is the intended default/expected state, so the highlight instead flags
     // the less common one: lit up (red) when rolls from this menu are PUBLIC.
     gmRollBtn.classList.toggle("btm-header-active", !menu?.gmRoll);
-    gmRollBtn.dataset.tooltip = menu?.gmRoll ? "GM Roll: on (whispered to GMs)" : "Public roll (click for GM Roll)";
+    gmRollBtn.dataset.tooltip = menu?.gmRoll ? "GM Roll" : "Public Roll";
 
     let editBtn = header.querySelector(".btm-header-edit-toggle");
     if (!editBtn) {
@@ -557,7 +557,7 @@ export class JournalMenuApp extends HandlebarsApplicationMixin(ApplicationV2) {
       btn.type = "button";
       btn.className = "btm-table-select-all-btn";
       btn.contentEditable = "false";
-      btn.title = "Select all chips in this table";
+      btn.title = "Select All";
       btn.innerHTML = '<i class="fa-solid fa-object-group"></i>';
       wrapper.appendChild(btn);
       wrapper.appendChild(table);
@@ -955,14 +955,14 @@ export class JournalMenuApp extends HandlebarsApplicationMixin(ApplicationV2) {
         content = chipsToMarkup(target);
       } catch (err) {
         console.error("Bobbins Table Menu: failed to serialize editor content for saving", err);
-        ui.notifications.error("Bobbins Table Menu: failed to save - see console (F12) for details.");
+        ui.notifications.error("BTM: failed to save - see console (F12) for details.");
         throw err;
       }
       try {
         await updateMenu(this.menuId, { content });
       } catch (err) {
         console.error("Bobbins Table Menu: failed to write saved content", err);
-        ui.notifications.error("Bobbins Table Menu: failed to save - see console (F12) for details.");
+        ui.notifications.error("BTM: failed to save - see console (F12) for details.");
         throw err;
       }
     })();

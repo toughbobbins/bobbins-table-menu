@@ -13,7 +13,7 @@ Foundry VTT. Built for Foundry v13 (verified on 13.351, uses the ApplicationV2 A
 
 ## Getting started
 
-1. Open the RollTables sidebar directory. You'll see a new **"Open Bobbins Table Menu List"**
+1. Open the RollTables sidebar directory. You'll see a new **"Open Menu List"**
    button in the header — click it to open the menu list.
 2. Click **New Menu**. It opens immediately in edit mode.
 3. Drag RollTables or Macros from their sidebar directories straight into the text box.
@@ -41,13 +41,13 @@ Foundry VTT. Built for Foundry v13 (verified on 13.351, uses the ApplicationV2 A
    you picked carry over correctly to this view and to posted chat messages too, and
    RollTable links roll directly when clicked (Macro links run directly - that's core
    Foundry's own behavior for Macro content links).
-6. The share icon ("Post to Chat") posts the current content to chat as one message,
+6. The share icon ("Send to Chat") posts the current content to chat as one message,
    with the same one-click behavior there too.
 7. The two macro-building icons in the title bar generate a hotbar macro for this menu
    (filed into a "Table Launcher Macros" folder in your macro directory, keeping them
    out of the top level):
-   - **Build Macro for Popup** — running it reopens this menu's editor/view popup.
-   - **Build Macro for Chat** — running it posts the menu straight to chat, skipping
+   - **Build Popup Macro** — running it reopens this menu's editor/view popup.
+   - **Build Chat Macro** — running it posts the menu straight to chat, skipping
      the popup entirely. Handy for a menu you just want to fire off in one click.
    You can build both for the same menu if you want either option available.
 8. A **Save** button next to the menu name saves your text and links at any point;
@@ -120,10 +120,6 @@ just opens the table sheet instead of rolling it, please tell me exactly what yo
 - Window size/position for each menu is remembered per-menu across sessions (saved
   when the popup closes, restored the next time you open that specific menu).
 - Menu data is stored in a world setting, so every GM sees the same menus.
-- Older menus built with the earlier structured-list style still open in their original
-  list-based popup for backward compatibility, but "New Menu" now only creates the
-  text-editor style described above.
-
 ## License
 
 Copyright (c) 2026 Robert Gill.
@@ -131,4 +127,3 @@ Copyright (c) 2026 Robert Gill.
 Free to use in your own games under the **PolyForm Strict License 1.0.0** (see `LICENSE`):
 use for noncommercial purposes is permitted, but you may not distribute copies or make
 changes or new works based on it. For anything beyond that, please get in touch first.
-

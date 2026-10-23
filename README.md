@@ -1,5 +1,8 @@
 # Bobbins Table Menu
 
+
+https://youtu.be/ugdSaDWQDak
+
 Build inter-linked quick launch dashboards of RollTables and Macros with a drag and drop text editor, styled buttons and one-click rolling to a popup or chat. Works with Bobbins Tables to create branching decision trees.
 
 Requires Foundry v13. GM only.
